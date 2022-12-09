@@ -2,43 +2,46 @@
 
 <head>
     <style>
-        @media (prefers-color-scheme: light) {
-            body {
-                color: #222;
-                background: #fff;
-                font: 100% system-ui;
-            }
-
-            a {
-                color: #0033cc;
-            }
-
-            h1 {
-                color: blue
-            }
+        .dark-example-03-wrapper {
+            --bg-color: black;
+            --text-color: white;
+            --h1-color: blue;
         }
 
-        @media (prefers-color-scheme: dark) {
-            body {
-                color: #eee;
-                background: #121212;
-            }
+        .dark-example-03-wrapper.light {
+            --bg-color: white;
+            --text-color: black;
+            --h1-color: red;
+        }
 
-            body a {
-                color: #809fff;
-            }
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font: 100% system-ui;
+        }
 
-            h1 {
-                color: red;
-            }
+        h1 {
+            color: var(--h1-color);
         }
 
     </style>
 </head>
 
-<body>
+<body class="dark-example-03-wrapper">
     <h1>HELLO WORLD</h1>
     <h1 class="main">HELLO WORLD</h1>
+    <button class="dark-example-03-btn" onclick="(function(){
+        const el = document.querySelector('.dark-example-03-wrapper');
+        const isLightMode = el.classList.contains('light');
+        if(isLightMode){
+          el.classList.remove('light');
+          el.classList.add('dark')
+        } else {
+          el.classList.remove('dark');
+          el.classList.add('light')
+        }
+        return false;
+    })();return false;">컬러모드 스위치</button>
 </body>
 
 </html>

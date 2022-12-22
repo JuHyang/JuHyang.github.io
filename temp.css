@@ -1,0 +1,179 @@
+html,
+body {
+    font-family: roboto;
+    font-size: 12pt;
+    height: 100%;
+    margin: 0px;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 0px;
+    width: 100%;
+}
+
+.header {
+    border-bottom: 1pt #EEEEEE solid;
+    display: inline-block;
+    max-width: 90%;
+    padding: 17pt 17pt 17pt 17pt;
+    width: 90%;
+}
+
+.center {
+    justify-content: center;
+}
+
+.header>.icon {
+    float: left;
+    height: 40pt;
+    max-height: 40pt;
+    max-width: 40pt;
+    padding-top: 6pt;
+    width: 40pt;
+}
+
+.header>.container {
+    max-width: 70%;
+    padding: 6pt;
+    width: 70%;
+}
+
+.header>.container>p {
+    margin: 0px;
+    overflow: hidden;
+    padding: 2px 0px 2px 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main {
+    background-color: #FAFAFA;
+    height: 97%;
+    padding: 6pt;
+    width: 96%;
+}
+
+.main .main-container {
+    background-color: #FFFFFF;
+    margin-bottom: 6pt;
+    padding: 17pt;
+}
+
+.title {
+    color: #727272;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.type {
+    color: #A0A0A0;
+    font-size: 12pt;
+    font-weight: 200;
+}
+
+.separator {
+    border-bottom: 1px solid #A0A0A0;
+    height: 7pt;
+    margin-bottom: 4pt;
+}
+
+.points {
+    color: #1290FF;
+    float: right;
+    font-size: 14pt;
+    font-weight: bold;
+    padding-top: 5pt;
+}
+
+button {
+    background: #1290FF;
+    border: 1pt solid #1290FF;
+    border-radius: 2pt;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 200;
+    margin: 20pt auto;
+    max-width: 100%;
+    padding: 6pt 0pt;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+
+button>img {
+    height: 14pt;
+    margin: 15px 0px 0px 12px;
+}
+
+button>div {
+    font-size: 1.1em;
+    margin: 6pt;
+}
+
+article {
+    color: #727272;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.subject {
+    color: #1290FF;
+    font-size: 1.1em;
+    margin-bottom: 4pt;
+}
+
+.text {
+    color: #808080;
+    font-size: 1.1em;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: #1D2126;
+    }
+    
+    .header {
+        border-bottom: 1pt #15181D solid;
+    }
+
+    .main {
+        background-color: #1D2126;
+    }
+
+    .main .main-container {
+        background-color: #1D2126;
+    }
+
+    .title {
+        color: #D2D3D4;
+    }
+
+    .type {
+        color: #999B9D;
+    }
+
+    .separator {
+        border-bottom: 1px solid #15181D;
+    }
+
+    .points {
+        color: #1290FF;
+    }
+
+    button {
+        background: #1290FF;
+        border: 1pt solid #1290FF;
+        color: #FFFFFF;
+    }
+
+    .subject {
+        color: #1290FF;
+    }
+
+    .text {
+        color: #D2D3D4;
+    }
+}

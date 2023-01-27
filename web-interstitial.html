@@ -1,0 +1,20 @@
+<html>
+<head>    
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>    
+  <title>TEST</title>
+</head>
+<body>    
+  <input type='button' onClick='showInterstitial()' value='show interstitial' />    
+  <script type='text/javascript'>        
+    const showInterstitial = () => {            
+      var userAgent = navigator.userAgent;
+      if (/android/i.test(userAgent)) {
+        BuzzAdBenefitJSBridge.showInterstitial()            
+      }
+      if (/iPad|iPhone|iPod/.test(userAgent)) {                
+        webkit.messageHandlers.BuzzAdBenefitJSBridge.postMessage('showInterstitial')            
+      }        
+    }    
+  </script>
+</body>
+</html>

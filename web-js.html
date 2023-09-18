@@ -90,8 +90,11 @@
                 appId: getAppId()
             });
 
+        }
+
+        function setUserProfile() {
             BuzzAdBenefit.setUserProfile({
-                userId: 'Your_Service_User_ID',
+                userId: 'SAMPLEUSER',
                 gender: BuzzAdBenefit.Gender.FEMALE,
                 birthYear: 1980
             });
@@ -127,9 +130,10 @@
 </head>
 
 <body>
-    <input type='button' onClick='initBuzzBenefit()' value='initBuzzBenefit' width="300" height="300" />
-    <input type='button' onClick='loadAd()' value='loadAd' width="300" height="300" />
-    <div id="message" style="font-size: 100px">MESSAGE MESSAGE</div>
+    <input type='button' onClick='initBuzzBenefit()' value='initBuzzBenefit' width="100px" height="100px" />
+    <input type='button' onClick='setUserProfile()' value='setUserProfile' width="100px" height="100px" />
+    <input type='button' onClick='loadAd()' value='loadAd' width="100px" height="100px" />
+    <div id="message" style="font-size: 50px">MESSAGE MESSAGE</div>
     <li class="post native-ad" id="placement1">
         <div class="buzz-mediaview clickable">
         </div>

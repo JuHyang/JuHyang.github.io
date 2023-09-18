@@ -76,41 +76,45 @@
             ctaView.innerText = ctaTextHeader + nativeAd.callToAction;
         }
 
-        BuzzAdBenefit.init({
-            appId: getAppId()
-        });
-
-        BuzzAdBenefit.setUserProfile({
-            userId: 'Your_Service_User_ID',
-            gender: BuzzAdBenefit.Gender.FEMALE,
-            birthYear: 1980
-        });
-
-        BuzzAdBenefit.ensureAuthenticated
-            .then(() => {
-                return BuzzAdBenefit.loadAd({
-                    unitId: {
-                        ios: 'iOS_NATIVE_UNIT_ID', // 아이폰 앱에서는 광고를 요청하지 않는 경우 생략 가능
-                    }
-                });
-            }).then((nativeAd) => {
-                console.log('An ad is loaded!');
-                populateAd(nativeAd); // 광고 표시			
-            }).catch((e) => {
-                if (e.message === 'EMPTY_RESPONSE') {
-                    console.log('NO FILL');
-                } else {
-                    console.error('An error is detected while loading ad: ' + e.message);
-                }
-                hideAd();
+        function initBuzzBenefit() {
+            BuzzAdBenefit.init({
+                appId: getAppId()
             });
 
-        BuzzAdBenefit.registerNativeAd(nativeAd, placementView, adListener);
+            BuzzAdBenefit.setUserProfile({
+                userId: 'Your_Service_User_ID',
+                gender: BuzzAdBenefit.Gender.FEMALE,
+                birthYear: 1980
+            });
+        }
+
+        function loadAd() {
+            BuzzAdBenefit.ensureAuthenticated
+                .then(() => {
+                    return BuzzAdBenefit.loadAd({
+                        unitId: {
+                            ios: '453995955032448', // 아이폰 앱에서는 광고를 요청하지 않는 경우 생략 가능
+                        }
+                    });
+                }).then((nativeAd) => {
+                    console.log('An ad is loaded!');
+                    populateAd(nativeAd); // 광고 표시			
+                }).catch((e) => {
+                    if (e.message === 'EMPTY_RESPONSE') {
+                        console.log('NO FILL');
+                    } else {
+                        console.error('An error is detected while loading ad: ' + e.message);
+                    }
+                    hideAd();
+                });
+        }
 
     </script>
 </head>
 
 <body>
+    <input type='button' onClick='initBuzzBenefit()' value='initBuzzBenefit' />    
+    <input type='button' onClick='loadAd()' value='loadAd' />    
     <li class="post native-ad" id="placement1" style="display: none">
         <div class="buzz-mediaview clickable">
         </div>

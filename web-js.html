@@ -84,6 +84,8 @@
         }
 
         function initBuzzBenefit() {
+            const errortext = document.getElementById('message');
+            errortext.innerText = "INIT BuzzBenefit"
             BuzzAdBenefit.init({
                 appId: getAppId()
             });
@@ -96,6 +98,8 @@
         }
 
         function loadAd() {
+            const errortext = document.getElementById('message');
+            errortext.innerText = "Load Ad"
             BuzzAdBenefit.ensureAuthenticated
                 .then(() => {
                     return BuzzAdBenefit.loadAd({
@@ -123,9 +127,9 @@
 </head>
 
 <body>
-    <input type='button' onClick='initBuzzBenefit()' value='initBuzzBenefit' width="300" height="300"/>
-    <input type='button' onClick='loadAd()' value='loadAd' width="300" height="300"/>
-    <div id="message" style="font-size: 100px" >MESSAGE MESSAGE</div>
+    <input type='button' onClick='initBuzzBenefit()' value='initBuzzBenefit' width="300" height="300" />
+    <input type='button' onClick='loadAd()' value='loadAd' width="300" height="300" />
+    <div id="message" style="font-size: 100px">MESSAGE MESSAGE</div>
     <li class="post native-ad" id="placement1">
         <div class="buzz-mediaview clickable">
         </div>

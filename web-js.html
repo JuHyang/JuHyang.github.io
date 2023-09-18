@@ -1,0 +1,131 @@
+<html>
+
+<head>
+    <script src="https://buzz-js.buzzvil.com/buzzad-benefit-sdk/1.3.1/buzzad-benefit-sdk.js">
+    </script>
+
+    <script>
+        function getAppId() {
+            var ANDROID_APP_ID = 'ANDROID_APP_ID';
+            var IOS_APP_ID = 'IOS_APP_ID';
+
+            switch (BuzzAdBenefit.platform) {
+                case 'android':
+                    return ANDROID_APP_ID;
+                case 'ios':
+                    return IOS_APP_ID;
+                default:
+                // not supported platform
+            }
+        }
+
+        function populateAd(nativeAd) {
+            const adListener = {
+                onImpressed: function (placementView, nativeAd) {
+                    console.log('ON IMPRESSED: The ad is impressed.');
+                },
+                onClicked: function (placementView, nativeAd) {
+                    console.log('ON CLICKED: The ad is clicked.');
+                },
+                onRewardRequested: function (placementView, nativeAd) {
+                    console.log('ON REWARD REQUESTED: Reward is requested.');
+                },
+                onRewarded: function (placementView, nativeAd, result) {
+                    console.log('ON REWARDED: The result of Reward: ' + result);
+                },
+                onParticipated: function (placementView, nativeAd) {
+                    console.log('ON PARTICIPATED: The ad is set to particiated.');
+                    updateCtaView(element.getElementsByClassName('cta')[0], nativeAd);  // 아래에서 설명
+                },
+                onVideoError: function (placementView, nativeAd, errorCode, errorMessage) {
+                    console.error('ON VIDEO ERROR: An error is detected: ' + errorCode + '\n' + errorMessage);
+                },
+            };
+
+            const placementView = document.getElementById('placement1');
+            BuzzAdBenefit.registerNativeAd(nativeAd, placementView, adListener);
+            renderAd(placementView, nativeAd);  // 광고 구성요소를 DOM에 추가하여 화면에 표시
+        }
+
+        function renderAd(placementView, nativeAd) {
+            placementView.style.display = '';
+            placementView.getElementsByClassName('icon')[0].setAttribute('src', nativeAd.iconUrl);
+            placementView.getElementsByClassName('title')[0].innerHTML = nativeAd.title;
+            placementView.getElementsByClassName('description')[0].innerHTML = nativeAd.description;
+
+            updateCtaView(placementView.getElementsByClassName('cta')[0], nativeAd);
+        }
+
+        function hideAd() {
+            const placementView = document.getElementById('placement1');
+            placementView.style.display = 'none';
+        }
+
+        function updateCtaView(ctaView, nativeAd) {
+            var ctaTextHeader = '';
+            if (nativeAd.reward) {
+                if (nativeAd.participated) {
+                    // CtaView의 디자인을 '이미 참여하여 리워드 지급 불가능 상태'로 표시
+                } else {
+                    // CtaView의 디자인을 '참여 시 리워드 지급 가능 상태'로 표시
+                    ctaTextHeader = '+' + nativeAd.reward + ' ';
+                }
+            } else {
+                // CtaView의 디자인을 '지급 가능한 리워드 없음' 상태로 표시
+            }
+            ctaView.innerText = ctaTextHeader + nativeAd.callToAction;
+        }
+
+        BuzzAdBenefit.init({
+            appId: getAppId()
+        });
+
+        BuzzAdBenefit.setUserProfile({
+            userId: 'Your_Service_User_ID',
+            gender: BuzzAdBenefit.Gender.FEMALE,
+            birthYear: 1980
+        });
+
+        BuzzAdBenefit.ensureAuthenticated
+            .then(() => {
+                return BuzzAdBenefit.loadAd({
+                    unitId: {
+                        ios: 'iOS_NATIVE_UNIT_ID', // 아이폰 앱에서는 광고를 요청하지 않는 경우 생략 가능
+                    }
+                });
+            }).then((nativeAd) => {
+                console.log('An ad is loaded!');
+                populateAd(nativeAd); // 광고 표시			
+            }).catch((e) => {
+                if (e.message === 'EMPTY_RESPONSE') {
+                    console.log('NO FILL');
+                } else {
+                    console.error('An error is detected while loading ad: ' + e.message);
+                }
+                hideAd();
+            });
+
+        BuzzAdBenefit.registerNativeAd(nativeAd, placementView, adListener);
+
+    </script>
+</head>
+
+<body>
+    <li class="post native-ad" id="placement1" style="display: none">
+        <div class="buzz-mediaview clickable">
+        </div>
+        <div class="info">
+            <div class="icon-wrapper clickable">
+                <img class="icon">
+            </div>
+            <h5 class="title clickable"></h5>
+        </div>
+        <div class="description">
+        </div>
+        <div class="button-wrapper">
+            <button class="cta clickable"></button>
+        </div>
+    </li>
+</body>
+
+</html>

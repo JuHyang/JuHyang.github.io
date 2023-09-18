@@ -107,9 +107,12 @@
                     console.log('An ad is loaded!');
                     populateAd(nativeAd); // 광고 표시			
                 }).catch((e) => {
+                    const errortext = document.getElementById('message');
                     if (e.message === 'EMPTY_RESPONSE') {
+                        errortext.innerText = 'NO FILL'
                         console.log('NO FILL');
                     } else {
+                        errortext.innerText = 'An error is detected while loading ad: ' + e.message
                         console.error('An error is detected while loading ad: ' + e.message);
                     }
                     hideAd();

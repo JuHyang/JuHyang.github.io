@@ -6,7 +6,7 @@
 
     <script>
         function getAppId() {
-            var ANDROID_APP_ID = 'ANDROID_APP_ID';
+            var ANDROID_APP_ID = '217456794281463';
             var IOS_APP_ID = 'IOS_APP_ID';
 
             switch (BuzzAdBenefit.platform) {
@@ -107,6 +107,7 @@
                 .then(() => {
                     return BuzzAdBenefit.loadAd({
                         unitId: {
+                            android: '281565624887024',
                             ios: '453995955032448', // 아이폰 앱에서는 광고를 요청하지 않는 경우 생략 가능
                         }
                     });
